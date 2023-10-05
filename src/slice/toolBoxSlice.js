@@ -1,33 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { COLORS, MENU_ITEMS } from "@/constants";
+import { createSlice } from '@reduxjs/toolkit'
+import { MENU_ITEMS, COLORS } from '@/constants'
 
 const initialState = {
-  [MENU_ITEMS.PENCIL]: {
-    color: COLORS.BLACK,
-    size: 3,
-  },
-  [MENU_ITEMS.ERASER]: {
-    color: COLORS.WHITE,
-    size: 3,
-  },
-  [MENU_ITEMS.UNDO]: {},
-  [MENU_ITEMS.REDO]: {},
-  [MENU_ITEMS.DOWNLOAD]: {},
-};
-
-export const toolBoxSlice = createSlice({
-  name: "toolbox",
-  initialState,
-  reducers: {
-    changeColor: (state, action) => {
-      state[action.payload.item].color = action.payload.color;
+    [MENU_ITEMS.PENCIL]: {
+        color: COLORS.BLACK,
+        size: 3
     },
-    changeBrushSize: (state, action) => {
-      state[action.payload.item].size = action.payload.size;
+    [MENU_ITEMS.ERASER]: {
+        color: COLORS.WHITE,
+        size: 3
     },
-  },
-});
+    [MENU_ITEMS.UNDO]: {},
+    [MENU_ITEMS.REDO]: {},
+    [MENU_ITEMS.DOWNLOAD]: {},
+}
 
-export const { changeColor, changeBrushSize} = toolBoxSlice.actions;
+export const toolboxSlice = createSlice({
+    name: 'toolbox',
+    initialState,
+    reducers: {
+        changeColor: (state, action) => {
+            state[action.payload.item].color = action.payload.color
+        },
+        changeBrushSize: (state, action) => {
+            state[action.payload.item].size = action.payload.size
+        }
+    }
+})
 
-export default toolBoxSlice.reducer;
+export const {changeColor, changeBrushSize} = toolboxSlice.actions
+
+export default toolboxSlice.reducer
