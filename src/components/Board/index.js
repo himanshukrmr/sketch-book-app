@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { MENU_ITEMS } from "@/constants";
 import { actionItemClick } from '@/slice/menuSlice'
+import styles from './index.module.css'
+
 
 
 const Board = () => {
@@ -15,11 +17,14 @@ const Board = () => {
     const {color, size} = useSelector((state) => state.toolbox[activeMenuItem])
 
 
+    
+
     // Use Effect for UNDO and REDO
     useEffect(() => {
         if (!canvasRef.current) return
         const canvas = canvasRef.current;
-        const context = canvas.getContext('2d')
+        const context = canvas.getContext('2d');
+
 
         if (actionMenuItem === MENU_ITEMS.DOWNLOAD) {
             const URL = canvas.toDataURL()
@@ -49,7 +54,7 @@ const Board = () => {
         }
 
         const handleChangeConfig = (config) => {
-            console.log("config", config)
+            // console.log("config", config)
             changeConfig(config.color, config.size)
         }
         changeConfig(color, size)
@@ -66,8 +71,10 @@ const Board = () => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d')
 
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        context.fillStyle = 'white'; // To setting the background-color of dwonload image to white
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
         const beginPath = (x, y) => {
             context.beginPath()
@@ -92,7 +99,7 @@ const Board = () => {
             shouldDraw.current = false
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
             drawHistory.current.push(imageData)
-            historyPointer.current = drawHistory.current.length - 1
+            historyPointer.current = drawHistory.current.length - 1;
         }
 
         const handleBeginPath = (path) => {
@@ -116,7 +123,7 @@ const Board = () => {
         }
     }, [])
 
-    return (<canvas ref={canvasRef}></canvas>
+    return (<canvas  className={styles.canvasBackground} ref={canvasRef}></canvas>
     )
 }
 
