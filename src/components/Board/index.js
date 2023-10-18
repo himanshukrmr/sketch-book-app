@@ -36,7 +36,11 @@ const Board = () => {
             if(historyPointer.current > 0 && actionMenuItem === MENU_ITEMS.UNDO) historyPointer.current -= 1
             if(historyPointer.current < drawHistory.current.length - 1 && actionMenuItem === MENU_ITEMS.REDO) historyPointer.current += 1
             const imageData = drawHistory.current[historyPointer.current]
-            context.putImageData(imageData, 0, 0)
+            context.putImageData(imageData, 0, 0);
+            // console.log(historyPointer.current)
+            // if(historyPointer.current == 0  && actionMenuItem === MENU_ITEMS.UNDO) historyPointer.current = 0;
+            // const imageDataEmpty = drawHistory.current[historyPointer.current]
+            // context.putImageData(imageDataEmpty, 0, 0);
         }
         dispatch(actionItemClick(null))
     }, [actionMenuItem, dispatch])
